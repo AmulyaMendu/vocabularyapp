@@ -56,7 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -71,7 +70,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
     const [data, setData] = useState("");
     const [searchWord, setSearchWord] = useState("");
     const [error, setError] = useState('');
@@ -79,14 +77,12 @@ function Header(props) {
     const navigate = useNavigate();
     const [values, setValues] = useSearch();
 
-
-    // Function to trigger the search
     const handleSearch = async () => {
         if (!searchWord) {
             setError('Please enter a word to search.');
             return;
         }
-        console.log('Search term:', searchWord);
+        console.log(searchWord);
         try {
             const posting = await axios.post(`http://localhost:5000/api/words`, { word: searchWord });
             console.log(posting.data)
@@ -106,13 +102,10 @@ function Header(props) {
         } catch (error) {
             console.error("error");
         }
-        // Trigger your search logic here, such as calling an API or filtering data
     };
-
-    // Handle pressing Enter in the search input
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            handleSearch(); // Trigger search when Enter is pressed
+            handleSearch();
         }
     };
 
@@ -194,7 +187,7 @@ function Header(props) {
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
+                        keepMounted: true,
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
@@ -254,10 +247,6 @@ function Header(props) {
 }
 
 Header.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 };
 

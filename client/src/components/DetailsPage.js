@@ -12,7 +12,7 @@ const DetailsPage = () => {
             <h1>Search Resuts</h1>
             <h1>
                 {values?.results.length < 1
-                    ? "No Products Found"
+                    ? "No words Found"
                     : `Found ${values?.results.length}`}
             </h1>
             {values?.results.map((item, index) => (

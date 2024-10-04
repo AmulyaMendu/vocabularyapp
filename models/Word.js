@@ -12,7 +12,7 @@ const entrySchema = new mongoose.Schema({
 
 const WordSchema = new mongoose.Schema({
     word: { type: String, required: true },
-    entries: [entrySchema]  // Array of entry objects
+    entries: [entrySchema]
 });
 
 module.exports = mongoose.model('Word', WordSchema);

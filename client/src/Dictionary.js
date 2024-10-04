@@ -14,39 +14,6 @@ const Dictionary = () => {
             setError('Please enter a word to search.');
             return;
         }
-
-        // try {
-        //     // const response = await axios.get(`http://localhost:5000/api/search?q=${searchWord}`);
-        //     // if (response.data.results.length > 0) {
-        //     //     setData(response.data.results);
-        //     //     console.log(response.data.results);
-        //     //     // console.log(response.data.results[0].label);
-
-        //     //     setError('');
-        //     // } else {
-        //     //     setData(null);
-        //     //     setError('No results found.');
-        //     // }
-
-        //     const response = await axios.get(`http://localhost:5000/api/words/${searchWord}`);
-        //     console.log(response.data);
-
-        //     // if (response.data.results.length > 0) {
-        //     //     setData(response.data.results);
-        //     //     console.log(response.data.results);
-        //     //     // console.log(response.data.results[0].label);
-
-        //     //     setError('');
-        //     // } else {
-        //     //     setData(null);
-        //     //     setError('No results found.');
-        //     // }
-        // } catch (error) {
-        //     console.error(error);
-        //     setError('Error fetching data. Please try again.');
-        //     setData(null);
-        // }
-
         try {
             const response = await axios.get(`http://localhost:5000/api/words/${searchWord}`);
             console.log(response.data.entries);

@@ -7,7 +7,7 @@ dotenv.config();
 const router = express.Router();
 const app_id = process.env.APP_ID;
 const app_key = process.env.APP_KEY;
-//Add a new word
+
 router.post('/', async (req, res) => {
     const { word } = req.body;
     wordsArray = []
@@ -29,27 +29,21 @@ router.post('/', async (req, res) => {
         if (!results || results.length === 0) {
             return res.status(404).json({ error: 'Word not found in Oxford API' });
         }
-
-
-        // Extract entries from the results
         const entries = results.map(result => ({
             id: result.id,
             label: result.label,
             matchString: result.matchString,
             matchType: result.matchType,
             score: result.score,
-            region: result.region || 'N/A'  // Optional: if region exists, otherwise 'N/A'
+            region: result.region || 'N/A'
         }));
 
-        // Create the word object with multiple entries
+        // object
         const wordObject = {
             word,
             entries
         };
-
-        // Save the word in MongoDB
         const newWord = await new Word(wordObject).save();
-
         res.json(newWord);
     } catch (error) {
         console.error('Error fetching word from Oxford API:', error.message);
@@ -59,9 +53,6 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-
-
 
 router.get('/:searchWord', async (req, res) => {
     const { searchWord } = req.params;
